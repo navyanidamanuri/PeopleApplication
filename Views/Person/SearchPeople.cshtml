@@ -1,0 +1,90 @@
+﻿@model IEnumerable<PeopleApplication.Models.Person>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>SearchPeople</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <h3 style="text-align:center">
+        <a asp-action="ShowAllPeople">Show All People</a>
+        &nbsp;&nbsp;|&nbsp;&nbsp;
+        <a asp-action="AddNewPerson">Add New Person</a>
+        &nbsp;&nbsp;|&nbsp;&nbsp;
+        <a asp-action="SearchPeople">Search Persons</a>
+    </h3>
+    <form asp-action="SearchPeople">
+        <div class="row">
+            <div class="col-md-4" style="text-align:right">Search(Person Name/City)</div>
+            <div class="col-md-4">
+                <input type="text" name="txtSearch" class="form-control" />
+            </div>
+            <div class="col-md-4" style="text-align:left">
+                <input type="submit" value="Search" class="btn btn-primary" />
+            </div>
+        </div>
+    </form>
+    <br /><br />
+    @if (Model != null)
+    {
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <table class="table table-dark">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Pid)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Pname)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.PhoneNumber)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.City)
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Pid)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Pname)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.PhoneNumber)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.City)
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+
+    }
+</body>
+</html>

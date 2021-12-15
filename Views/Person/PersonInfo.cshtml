@@ -1,0 +1,40 @@
+﻿
+@model PeopleApplication.Models.ViewModels.CreatePersonViewModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>AddNewPerson</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <table width="100%" border="1">
+    <tr>
+        <th>Person ID</th>
+        <th>Person Name</th>
+        <th>Person Number</th>
+        <th>City</th>
+    </tr>
+    <tr>
+        <td>@Html.DisplayFor(mk => mk.Pid)</td>
+        <td>@Html.DisplayFor(mk => mk.Pname)</td>
+        <td>@Html.DisplayFor(mk => mk.PhoneNumber)</td>
+        <td>@Html.DisplayFor(mk => mk.City)y</td>
+    </tr>
+    <tr>
+        <td colspan="4">
+            @Html.ActionLink("Back", "ShowAllPeople", "Person")
+            @Html.ActionLink("Delete", "DeletePerson", new { id = Model.Pid })
+        </td>
+    </tr>
+    </table>
+</body>
+
+</html>

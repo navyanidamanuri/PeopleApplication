@@ -1,0 +1,70 @@
+﻿@model IEnumerable<PeopleApplication.Models.ViewModels.PeopleViewModel>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ShowAllPeople</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <h3 style="text-align:center">
+        <a asp-action="ShowAllPeople">Show All People</a>
+        &nbsp;&nbsp;|&nbsp;&nbsp;
+        <a asp-action="AddNewPerson">Add New Person</a>
+        &nbsp;&nbsp;|&nbsp;&nbsp;
+        <a asp-action="SearchPeople">Search Persons</a>
+    </h3>
+    <hr />
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Pid)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Pname)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PhoneNumber)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.City)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Pid)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Pname)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PhoneNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.City)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Pid }) |
+                        @Html.ActionLink("Details", "PersonInfo", new { id=item.Pid }) |
+                       
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
+</html>
