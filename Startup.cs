@@ -8,6 +8,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using PeopleApplication.Models.Repos;
+using PeopleApplication.Models.Services;
+using PeopleApplication.Controllers;
+
 
 namespace PeopleApplication
 {
@@ -24,6 +28,8 @@ namespace PeopleApplication
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddScoped<IpeopleRepo, InMemoryPeopleRepo>();//Ioc& DI
+            services.AddScoped<IPeopleService, PeopleService>();//Ioc&DI
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

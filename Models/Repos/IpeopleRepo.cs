@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace PeopleApplication.Models.Repos
 {
-    interface IpeopleRepo
+   public  interface IpeopleRepo
     {
         Person Create(Person person);
         List<Person> Read();

@@ -9,7 +9,11 @@ namespace PeopleApplication.Models.Services
 {
     public class PeopleService:IPeopleService
     {
-        IpeopleRepo inMemoryPeopleRepo = new InMemoryPeopleRepo();
+       readonly IpeopleRepo inMemoryPeopleRepo;
+        public PeopleService(IpeopleRepo inMemoryPeopleRepo)
+        {
+            this.inMemoryPeopleRepo = inMemoryPeopleRepo;
+        }
         public Person Add(CreatePersonViewModel person)
         {
             Person per1 = new Person();

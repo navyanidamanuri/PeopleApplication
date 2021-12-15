@@ -6,7 +6,7 @@ using PeopleApplication.Models.ViewModels;
 
 namespace PeopleApplication.Models.Services
 {
-    interface IPeopleService
+     public interface IPeopleService
     {
         Person Add(CreatePersonViewModel person);
         List<Person> All();

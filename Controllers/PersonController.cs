@@ -13,7 +13,11 @@ namespace netcoremvcapp.Controllers
 {
     public class PersonController : Controller
     {
-        PeopleService people = new PeopleService();
+        IPeopleService people;
+       public PersonController(IPeopleService people)
+        {
+            this.people = people;
+        }
         // GET: People
         public IActionResult AddNewPerson()
         {
