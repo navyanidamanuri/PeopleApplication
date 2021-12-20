@@ -11,7 +11,8 @@ using System.Threading.Tasks;
 using PeopleApplication.Models.Repos;
 using PeopleApplication.Models.Services;
 using PeopleApplication.Controllers;
-
+using Microsoft.EntityFrameworkCore;
+using PeopleApplication.Models;
 
 namespace PeopleApplication
 {
@@ -27,9 +28,13 @@ namespace PeopleApplication
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<PeopleContext>(options =>
+                       options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddControllersWithViews();
-            services.AddScoped<IpeopleRepo, InMemoryPeopleRepo>();//Ioc& DI
+           // services.AddScoped<IpeopleRepo, InMemoryPeopleRepo>();//Ioc& DI
+            services.AddScoped<IPeopleRepo, DatabasePeopleRepo>();//Ioc& DI
             services.AddScoped<IPeopleService, PeopleService>();//Ioc&DI
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

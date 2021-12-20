@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace PeopleApplication.Models.Repos
 {
-    public class InMemoryPeopleRepo : IpeopleRepo
+    public class InMemoryPeopleRepo : IPeopleRepo
     {
 
         private static List<Person> lstPeople = new List<Person>();

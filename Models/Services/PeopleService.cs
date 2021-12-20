@@ -9,8 +9,8 @@ namespace PeopleApplication.Models.Services
 {
     public class PeopleService:IPeopleService
     {
-       readonly IpeopleRepo inMemoryPeopleRepo;
-        public PeopleService(IpeopleRepo inMemoryPeopleRepo)
+       readonly IPeopleRepo inMemoryPeopleRepo;
+        public PeopleService(IPeopleRepo inMemoryPeopleRepo)
         {
             this.inMemoryPeopleRepo = inMemoryPeopleRepo;
         }
