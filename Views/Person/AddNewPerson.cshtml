@@ -1,11 +1,10 @@
-﻿@model PeopleApplication.Models.ViewModels.CreatePersonViewModel
+﻿
+@model PeopleApplication.Models.ViewModels.CreatePersonViewModel
 
-@{
+@{ 
     Layout = null;
-}
-
+} 
 <!DOCTYPE html>
-
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
@@ -22,7 +21,7 @@
         <a asp-action="SearchPeople">Search Persons</a>
     </h3>
     <hr />
-    <div class="row">
+     <div class="row">
         <div class="col-md-3"></div>
         <div class="col-md-6">
             <form asp-action="AddNewPerson">
@@ -33,29 +32,33 @@
                         <h4 style="text-align:center">Add New Person</h4>
                     </div>
                     <div class="card-body">
-                       <!-----
+                        <!------
                         <div class="form-group">
                             <label asp-for="Pid" class="control-label"></label>
                             <input asp-for="Pid" class="form-control" />
                             <span asp-validation-for="Pid" class="text-danger"></span>
                         </div>
-                        --->
-                          
+                            ------>
+                        
                         <div class="form-group">
-                            <label asp-for="Pname" class="control-label"></label>
+                            Person Name
                             <input asp-for="Pname" class="form-control" />
                             <span asp-validation-for="Pname" class="text-danger"></span>
                         </div>
-                               
                         <div class="form-group">
-                            <label asp-for="PhoneNumber" class="control-label"></label>
+                            Phone Number
                             <input asp-for="PhoneNumber" class="form-control" />
                             <span asp-validation-for="PhoneNumber" class="text-danger"></span>
                         </div>
                         <div class="form-group">
-                            <label asp-for="City" class="control-label"></label>
-                            <input asp-for="City" class="form-control" />
-                            <span asp-validation-for="City" class="text-danger"></span>
+                            City Name
+                            <select asp-for="CityCode" class="form-control">
+                                @foreach (Cities city in ViewBag.ctinfo)
+                                {
+                                    <option value="@city.CityCode">@city.CityName</option>
+                                }
+                                </select>
+                                <span asp-validation-for="CityCode" class="text-danger"></span>
                         </div>
                         <div class="form-group">
                             <input type="submit" value="Create" class="btn btn-primary" />
@@ -72,5 +75,3 @@
     }
 </body>
 </html>
-
-

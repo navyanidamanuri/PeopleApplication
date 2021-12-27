@@ -13,77 +13,86 @@ namespace netcoremvcapp.Controllers
 {
     public class PersonController : Controller
     {
-        IPeopleService people;
-       public PersonController(IPeopleService people)
+        readonly IPeopleService peopleService;
+        readonly ICityService cityService;
+       public PersonController(IPeopleService peopleService, ICityService cityService)
         {
-            this.people = people;
+            this.peopleService = peopleService;
+            this.cityService = cityService;
         }
         // GET: People
         public IActionResult AddNewPerson()
         {
+            List<Cities> cityinfo = cityService.AllCities();
+            ViewBag.ctinfo = cityinfo;
             return View();
         }
 
         [HttpPost]
-        public IActionResult AddNewPerson(CreatePersonViewModel person)
+        public IActionResult AddNewPerson(CreatePersonViewModel cpvm)
         {
-            if (ModelState.IsValid)
-            {
-                Person per = people.Add(person);
-                if (per != null)
-                    ViewBag.info = "Person Details are Added...";
-                else
-                    ViewBag.info = "Person Details are Not Added...";
-            }
+            peopleService.Add(cpvm);
+            List<Cities> cityinfo = cityService.AllCities();
+            ViewBag.ctinfo = cityinfo;
             return View();
         }
 
         public IActionResult ShowAllPeople()
         {
-            List<Person> peopleinfo = people.All();
-            List<PeopleViewModel> viewpeopleList = new List<PeopleViewModel>();
-            PeopleViewModel pv = null;
-            if (peopleinfo.Count != 0)
-            {
-                foreach (Person p in peopleinfo)
+            List<Person> lstPerson = peopleService.All();
+            List<Cities> lstCity = cityService.AllCities();
+            var getPeople = lstPerson.Join(lstCity,
+                per => per.CityCode,
+                cty=>cty.CityCode,(per,cty)=>new
                 {
-                    pv = new PeopleViewModel();
-                    pv.Pid = p.Pid;
-                    pv.Pname = p.Pname;
-                    pv.PhoneNumber = p.PhoneNumber;
-                    pv.City = p.City;
-                    viewpeopleList.Add(pv);
-                }
+                    Pid = per.Pid,
+                    Pname = per.Pname,
+                    PhoneNumber = per.PhoneNumber,
+                    CityName = cty.CityName
+                });
+            List<PeopleViewModel> people = new List<PeopleViewModel>();
+            PeopleViewModel pvm = null;
+            foreach(var x in getPeople)
+            {
+                pvm = new PeopleViewModel();
+                pvm.Pid = x.Pid;
+                pvm.Pname = x.Pname;
+                pvm.PhoneNumber = x.PhoneNumber;
+                pvm.CityName = x.CityName;
+                people.Add(pvm);
             }
-            return View(viewpeopleList);
+            return View(people);
         }
 
 
         public IActionResult PersonInfo(int id)
         {
-            Person person = people.FindById(id);
-            CreatePersonViewModel cp = new CreatePersonViewModel();
-            cp.Pid = person.Pid;
-            cp.Pname = person.Pname;
-            cp.PhoneNumber = person.PhoneNumber;
-            cp.City = person.City;
-            return View(cp);
+            Person person = peopleService.FindById(id);
+            Cities city = cityService.FindById(person.CityCode);
+            PeopleViewModel pvm = new PeopleViewModel();
+            pvm.Pid = person.Pid;
+            pvm.Pname = person.Pname;
+            pvm.PhoneNumber = person.PhoneNumber;
+            pvm.CityName = city.CityName;
+            return View(pvm);
         }
 
         public IActionResult Edit(int id)
         {
-            Person person = people.FindById(id);
+            List<Cities> cityinfo = cityService.AllCities();
+            ViewBag.ctinfo = cityinfo;
+            Person person = peopleService.FindById(id);
             CreatePersonViewModel cp = new CreatePersonViewModel();
             cp.Pid = person.Pid;
             cp.Pname = person.Pname;
             cp.PhoneNumber = person.PhoneNumber;
-            cp.City = person.City;
+            cp.CityCode = person.CityCode;
             return View(cp);
         }
         [HttpPost]
         public IActionResult Edit(CreatePersonViewModel cpv)
         {
-            bool chk = people.Edit(cpv.Pid, cpv);
+            bool chk = peopleService.Edit(cpv.Pid, cpv);
             if (chk == true)
                 return RedirectToAction("ShowAllPeople");
             return View();
@@ -91,7 +100,7 @@ namespace netcoremvcapp.Controllers
 
         public IActionResult DeletePerson(int id)
         {
-            bool chk = people.Remove(id);
+            bool chk = peopleService.Remove(id);
             if (chk == true)
                 return RedirectToAction("ShowAllPeople");
 
@@ -107,7 +116,7 @@ namespace netcoremvcapp.Controllers
         public IActionResult SearchPeople(IFormCollection f)
         {
             string str = f["txtSearch"].ToString();
-            List<Person> all = people.Search(str);
+            List<Person> all = peopleService.Search(str);
             return View(all);
         }
     }

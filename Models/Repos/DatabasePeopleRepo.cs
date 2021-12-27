@@ -56,7 +56,7 @@ namespace PeopleApplication.Models.Repos
                 prsn.Pid = person.Pid;
                 prsn.Pname = person.Pname;
                 prsn.PhoneNumber = person.PhoneNumber;
-                prsn.City = person.City;
+                prsn.CityCode = person.CityCode;
                 dbCon.SaveChanges();
                 chk = true;
               }

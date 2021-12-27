@@ -1,5 +1,5 @@
-﻿
-@model PeopleApplication.Models.ViewModels.CreatePersonViewModel
+﻿  
+@model PeopleApplication.Models.ViewModels.PeopleViewModel
 
 @{
     Layout = null;
@@ -10,31 +10,34 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>AddNewPerson</title>
+    <title>Details</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
+    <div>
+        <h4 style="text-align:center">Person Details</h4>
     <table width="100%" border="1">
     <tr>
         <th>Person ID</th>
         <th>Person Name</th>
-        <th>Person Number</th>
-        <th>City</th>
+        <th>Phone Number</th>
+        <th>City Name </th>
     </tr>
     <tr>
         <td>@Html.DisplayFor(mk => mk.Pid)</td>
         <td>@Html.DisplayFor(mk => mk.Pname)</td>
         <td>@Html.DisplayFor(mk => mk.PhoneNumber)</td>
-        <td>@Html.DisplayFor(mk => mk.City)y</td>
+        <td>@Html.DisplayFor(mk => mk.CityName)</td>
     </tr>
     <tr>
-        <td colspan="4">
-            @Html.ActionLink("Back", "ShowAllPeople", "Person")
-            @Html.ActionLink("Delete", "DeletePerson", new { id = Model.Pid })
+        <td style="text-align:center" colspan="4">
+            <a asp-action="DeletePerson" asp-route-id="@Model.Pid">Delete</a>&nbsp;&nbsp; |&nbsp;&nbsp;
+            <a asp-action="ShowAllPeople">Back ToList</a>
         </td>
     </tr>
     </table>
+ </div>
 </body>
 
 </html>

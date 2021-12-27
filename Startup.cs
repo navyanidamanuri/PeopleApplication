@@ -33,8 +33,12 @@ namespace PeopleApplication
             services.AddControllersWithViews();
            // services.AddScoped<IpeopleRepo, InMemoryPeopleRepo>();//Ioc& DI
             services.AddScoped<IPeopleRepo, DatabasePeopleRepo>();//Ioc& DI
+            services.AddScoped<ICountryRepo, CountryRepo>();//Ioc& DI
+            services.AddScoped<ICityRepo, CityRepo>();//Ioc& DI
             services.AddScoped<IPeopleService, PeopleService>();//Ioc&DI
-            
+            services.AddScoped<ICountryService, CountryService>();//Ioc&DI
+            services.AddScoped<ICityService, CityService>();//Ioc&DI
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -61,7 +65,7 @@ namespace PeopleApplication
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Person}/{action=AddNewPerson}/{id?}");
+                    pattern: "{controller=Person}/{action=ShowAllPeople}/{id?}");
             });
         }
     }

@@ -6,14 +6,14 @@ using System.ComponentModel.DataAnnotations;
 
 namespace PeopleApplication.Models
 {
-    public class Person
+    public class Cities
     {   [Key]
-        public int Pid { get; set; }
-        public string Pname { get; set; }
-        public string PhoneNumber { get; set; }
-
         public int CityCode { get; set; }
-        public Cities city { get; set; }
+        public string CityName { get; set; }
+        public int CtryCode { get; set; }
+
+        public Country country { get; set; }
+        public ICollection<Person> person { get; set; }
 
     }
 }

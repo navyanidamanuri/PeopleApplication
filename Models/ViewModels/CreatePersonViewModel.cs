@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations;
 namespace PeopleApplication.Models.ViewModels
 {
     public class CreatePersonViewModel
-    {
+    {   [Key]
         [Required]
         public int Pid { get; set; }
         [Required]
@@ -16,6 +16,6 @@ namespace PeopleApplication.Models.ViewModels
         [Required]
         public string PhoneNumber{ get; set;}
         [Required]
-        public string City { get; set; }
+        public int CityCode { get; set; }
     }
 }

@@ -1,0 +1,68 @@
+﻿@model PeopleApplication.Models.ViewModels.CityViewModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>AddCity</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <h3 style="text-align:center">
+        @Html.ActionLink("Home", "ShowAllPeople", "Person")
+        &nbsp;&nbsp;|&nbsp;&nbsp;
+        <a asp-action="ViewCities">ViewCities</a>
+        &nbsp;&nbsp;|&nbsp;&nbsp;
+        <a asp-action="AddCity">Add New City</a>
+
+    </h3>
+    <hr />
+    
+    <hr />
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <form asp-action="AddCity">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="card">
+                    <div class="card-header">
+                        <h4 style="text-align:center">Add City</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label asp-for="CityName" class="control-label"></label>
+                            <input asp-for="CityName" class="form-control" />
+                            <span asp-validation-for="CityName" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="CtryCode" class="control-label"></label>
+                            <select asp-for="CtryCode">
+
+                                @foreach (Country ctry in ViewBag.cinfo)
+                                {
+                                    <option value="@ctry.CrtyCode">@ctry.CrtyName</option>
+                                }
+                            </select>
+
+                            <span asp-validation-for="CtryCode" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Create" class="btn btn-primary" />
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+     @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }
+</body>
+</html>

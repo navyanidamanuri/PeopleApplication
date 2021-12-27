@@ -1,4 +1,4 @@
-﻿@model IEnumerable<PeopleApplication.Models.ViewModels.PeopleViewModel>
+﻿@model IEnumerable<PeopleApplication.Models.ViewModels.GetCityViewModel>
 
 @{
     Layout = null;
@@ -9,40 +9,33 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>ShowAllPeople</title>
+    <title>ViewCities</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
     <h3 style="text-align:center">
-        <a asp-action="ShowAllPeople">Show All People</a>
+        @Html.ActionLink("Home", "ShowAllPeople", "Person")
         &nbsp;&nbsp;|&nbsp;&nbsp;
-        <a asp-action="AddNewPerson">Add New Person</a>
+        <a asp-action="ViewCities">ViewCities</a>
         &nbsp;&nbsp;|&nbsp;&nbsp;
-        <a asp-action="SearchPeople">Search Persons</a>
-        &nbsp;&nbsp;|&nbsp;&nbsp;
-        @Html.ActionLink("Cities", "ViewCities", "City")
-
-        &nbsp;&nbsp;|&nbsp;&nbsp;
-        @Html.ActionLink("Country", "ShowAll", "Country")
-
+        <a asp-action="AddCity">Add New City</a>
     </h3>
     <hr />
-
+    
     <table class="table table-bordered">
         <thead>
             <tr>
                 <th>
-                   Person Name
-                </th>
-                
-                <th>
-                    Phone Number
+                    City Code
                 </th>
                 <th>
                     City Name
                 </th>
-                <th></th>
+                <th>
+                    Country Name
+                </th>
+
             </tr>
         </thead>
         <tbody>
@@ -50,20 +43,15 @@
             {
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Pname)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.PhoneNumber)
+                        @Html.DisplayFor(modelItem => item.CityCode)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.CityName)
                     </td>
-                    
                     <td>
-                        <a asp-action="Edit" asp-route-id="@item.Pid">Edit</a>|
-                        <a asp-action="PersonInfo" asp-route-id="@item.Pid">Details</a>
-
+                        @Html.DisplayFor(modelItem => item.CtryName)
                     </td>
+
                 </tr>
             }
         </tbody>

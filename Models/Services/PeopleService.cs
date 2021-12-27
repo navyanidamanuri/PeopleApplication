@@ -20,7 +20,7 @@ namespace PeopleApplication.Models.Services
             per1.Pid = person.Pid;
             per1.Pname = person.Pname;
             per1.PhoneNumber = person.PhoneNumber;
-            per1.City = person.City;
+            per1.CityCode = person.CityCode;
             inMemoryPeopleRepo.Create(per1);
             return per1;
         }
@@ -35,7 +35,7 @@ namespace PeopleApplication.Models.Services
             Person per1 = new Person();
             per1.Pid = person.Pid;
             per1.Pname = person.Pname;
-            per1.City = person.City;
+            per1.CityCode = person.CityCode;
             per1.PhoneNumber = person.PhoneNumber;
             bool chk = inMemoryPeopleRepo.Update(per1);
             return chk;
@@ -61,7 +61,7 @@ namespace PeopleApplication.Models.Services
 
             foreach (Person p in listAll)
             {
-                if (p.Pname.Equals(search) || p.City.Equals(search))
+                if (p.Pname.Equals(search) )
                 {
                     listFilter.Add(p);
                 }

@@ -59,7 +59,7 @@ namespace PeopleApplication.Models.Repos
                 if (p.Pid == person.Pid)
                 {
                     p.Pname = person.Pname;
-                    p.City = person.City;
+                    p.CityCode = person.CityCode;
                     p.PhoneNumber = person.PhoneNumber;
                     chk = true;
                     break;

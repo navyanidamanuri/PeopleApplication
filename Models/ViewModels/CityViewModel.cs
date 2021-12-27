@@ -1,17 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
-using System.ComponentModel.DataAnnotations;
 
 namespace PeopleApplication.Models.ViewModels
 {
-    public class PeopleViewModel
+    public class CityViewModel
     {  [Key]
-        public int Pid { get; set; }
-        public string Pname { get; set; }
-        public string PhoneNumber { get; set; }
+        public int CityCode { get; set; }
         public string CityName { get; set; }
+        public int CtryCode { get; set; }
 
     }
 }
